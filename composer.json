@@ -1,0 +1,47 @@
+{
+    "name": "valesaude/shortener-client",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Vale Saude Sempre",
+            "email": "ti@valesaudesempre.com.br"
+        }
+    ],
+    "require": {
+        "php": "7.3.*",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.5",
+        "illuminate/support": "5.5.*",
+        "illuminate/contracts": "5.5.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "mockery/mockery": "~1.0",
+        "orchestra/testbench": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ValeSaude\\ShortenerClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ValeSaude\\ShortenerClient\\ShortenerClientServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}

@@ -4,6 +4,7 @@ namespace ValeSaude\ShortenerClient;
 
 use DateTimeImmutable;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
@@ -63,13 +64,17 @@ class ShortenerClient
             $this->putCache($url, $shortUrl);
 
             return $shortUrl;
-        } catch (RequestException $e) {
+        } catch (GuzzleException $e) {
             $this->handleErrorResponse($e);
         }
     }
 
-    private function handleErrorResponse(RequestException $e): void
+    private function handleErrorResponse(GuzzleException $e): void
     {
+        if (!$e instanceof RequestException) {
+            throw ShortenerClientException::unexpectedResponse();
+        }
+
         if (!$e->hasResponse()) {
             throw ShortenerClientException::unexpectedResponse();
         }
